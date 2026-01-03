@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QUY TRÌNH GIAO TIẾP - LIL'TOMMY</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="icon" href="../favicon.png" type="image/x-icon">
+    <style>
+        #content-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 120px 30px 100px;
+            line-height: 1.8;
+            color: #333;
+        }
+
+        #content-container h1 {
+            font-size: 2.5em;
+            margin-bottom: 0.5em;
+            margin-top: 1.5em;
+            font-weight: 600;
+        }
+
+        #content-container h2 {
+            font-size: 1.8em;
+            margin-top: 2em;
+            margin-bottom: 1em;
+            font-weight: 500;
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 0.3em;
+        }
+
+        #content-container h3 {
+            font-size: 1.3em;
+            margin-top: 1.5em;
+            margin-bottom: 0.8em;
+            font-weight: 500;
+            color: #555;
+        }
+
+        #content-container p {
+            margin-bottom: 1em;
+            font-size: 1.1em;
+        }
+
+        #content-container ul,
+        #content-container ol {
+            margin-bottom: 1.5em;
+            padding-left: 2em;
+        }
+
+        #content-container li {
+            margin-bottom: 0.8em;
+            font-size: 1.05em;
+        }
+
+        #content-container strong {
+            font-weight: 600;
+            color: #000;
+        }
+
+        #content-container em {
+            font-style: italic;
+        }
+
+        #content-container blockquote {
+            border-left: 4px solid #000;
+            padding-left: 1.5em;
+            margin: 1.5em 0;
+            font-style: italic;
+            color: #555;
+            background-color: #f9f9f9;
+            padding: 1em 1.5em;
+            border-radius: 4px;
+        }
+
+        #content-container table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5em 0;
+            font-size: 1em;
+        }
+
+        #content-container table th,
+        #content-container table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+
+        #content-container table th {
+            background-color: #f1f1f1;
+            font-weight: 600;
+        }
+
+        #content-container table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        #content-container code {
+            background-color: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+
+        #content-container pre {
+            background-color: #f4f4f4;
+            padding: 1em;
+            border-radius: 4px;
+            overflow-x: auto;
+            margin: 1em 0;
+        }
+
+        #content-container hr {
+            border: none;
+            border-top: 2px solid #ddd;
+            margin: 2em 0;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 50px;
+            font-size: 1.2em;
+            color: #666;
+        }
+
+        @media (max-width: 768px) {
+            #content-container {
+                padding: 100px 20px 80px;
+            }
+
+            #content-container h1 {
+                font-size: 2em;
+            }
+
+            #content-container h2 {
+                font-size: 1.5em;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="nav">
+        <h3><b>LIL</b>'TOMMY</h3>
+        <div id="nav-buttons">
+            <button><a href="../index.html">TRỞ VỀ</a></button>
+        </div>
+    </div>
+
+    <div id="content-container">
+        <div id="markdown-content" class="loading">Đang tải nội dung...</div>
+    </div>
+
+    <Footer>
+        <div id="footer">
+            <p>
+                &copy; 2024 LIL<b>TOMMY</b>. All rights reserved.
+            </p>
+        </div>
+    </Footer>
+
+    <!-- Marked.js library for markdown parsing -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script>
+        // Fetch and render markdown content
+        fetch('1.md')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Không thể tải file markdown');
+                }
+                return response.text();
+            })
+            .then(markdown => {
+                // Configure marked options
+                marked.setOptions({
+                    breaks: true,
+                    gfm: true
+                });
+
+                // Convert markdown to HTML
+                const html = marked.parse(markdown);
+                
+                // Insert HTML into content container
+                document.getElementById('markdown-content').innerHTML = html;
+                document.getElementById('markdown-content').classList.remove('loading');
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                document.getElementById('markdown-content').innerHTML = 
+                    '<p style="color: red; text-align: center;">Lỗi: Không thể tải nội dung từ file 1.md</p>';
+            });
+    </script>
+</body>
+
+</html>
+
